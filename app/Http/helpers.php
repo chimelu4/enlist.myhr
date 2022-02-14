@@ -20,4 +20,12 @@ function getRowName($id)
                 return $jobrole->name;
 }
 
+function generateBid(){
+   
+      $randAlpha = strtolower(substr(str_shuffle( implode("",range("A","Z")) ),0,5));
+     $rid = "enlist".date("ymd").$randAlpha; //generating a unique userid using three random alphabets and year(two figures),month(two figures), day(two figures)
+    return $rid;
+    
+}
+
   ?>

@@ -13,140 +13,133 @@
   <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
 
   <link rel="stylesheet" href="{{ URL::to('/') }}/public/assets/css/style.css">
+  <link rel="stylesheet" href="{{URL::to('/')}}/public/frontend/assets/css/style.css">
+  <!-- Extra styling for the services page  -->
   <link rel="stylesheet" href="{{ URL::to('/') }}/public/assets/css/custom.css">
   <link rel="stylesheet" href="{{ URL::to('/') }}/public/assets/css/components.css">
   <link rel="stylesheet" href="{{ URL::to('/') }}/public/assets/css/fnon.min.css">
  
 </head>
 <style >
-.min-h-screen {
-    background-color: #fff !important;
-  }
-  .w-full{
-      border: 1px solid lightgray !important;
-      box-shadow: none !important;
-      
+body{
+    margin-top:20px;
+}
+.account-block {
+    padding: 0;
+    background-image: url('public/frontend/assets/images/auth/login.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: relative;
+}
+.account-block .overlay {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.account-block .account-testimonial {
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 1.75rem;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+}
 
-  }
-  button{
-     background:#ff4500 !important;
-  }
-  @media(max-width:1100px){
-  .thumbnail{
-   
-width: 40% !important;
-   margin-right: 40px;
-   padding-right: 30px;
-   padding-left: 10px;
-   padding-top: 10px;
-   display: none;
+.text-theme {
+    color: #ff4500 !important;
 }
+.main-wrapper{
+ max-width:400px;
 }
-.thumbnail{
-   
-  width: 50% !important;
-   margin-right: 90px;
-   padding-right: 45px;
-   padding-left: 15px;
-   padding-top: 15px;
+.overlay-logo{
+  z-index: 9999;
 }
-
-.version{
-  background: #000;
-  color: #fff;
-  border-radius: 20px;
-  float: left;
-  padding: 0px;
-  width: 100px;
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  z-index: 999999;
-  font-size: 12px;
-}
-.version-holder{
-  position:relative; 
-  z-index:9999999
-}
- 
   </style>
-<body>
+ 
+<div id="main-wrapper" >
+<a href="{{URL::to('/')}}"><div class="ml-5  overlay-logo">
+    <img width="70" height="30" src="{{URL::to('/')}}/public/frontend/assets/images/footer-logo.png" alt="">
+    </div></a>
+    <div class="row justify-content-center p-5">
+        <div class="col-xl-10">
+            <div class="card border-0">
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-5">
+                            <div class="p-4">
+                               <div class="mb-2">
+                                    <!---<img width="100" height="50" src="{{URL::to('/')}}/public/frontend/assets/images/footer-logo.png" alt="">--->
+                                </div>
 
-<div class="row">
+                                <h4 class=" mb-4">Welcome back!</h4>
+                                <div class="text-danger text-center" id='error'></div>
+                                @if (session('status'))
+                                    <div class="mb-4 font-medium text-sm text-center text-danger">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                <p class="text-muted mt-2 mb-2">Enter your email address and password to access admin panel.</p>
 
-<div  class=" version-holder col-md-12">
-<p class="version">Version 1.5</p>
-</div>
+                                <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email | Username</label>
+                                        <input type="text" class="form-control" id="email" required autofocus name="email" :value="{{ old('username') ?: old('email') }}">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" >
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-12 ">
+                                    <x-jet-checkbox id="remember_me" name="remember" />
+                                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>              
+                                    </div>
+                                      <div class="col-12">
+                                      <x-jet-checkbox  onclick="myFunction()"/> <span class="ml-2 text-sm text-gray-600">{{ __('Show Password') }}</span>
+                                      </div>
+                                    
+                                </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <a href="{{URL::to('forgot-my-password')}}" class="forgot-link float-right text-primary">Forgot password?</a>
+                                </form>                 
+            <p class="text-muted text-center  ">Don't have an account? <a href="{{URL::to('register')}}" class="text-primary ml-1">register</a></p>
 
-  <div class="col-md-12" id="app">
-    <section style="margin-top: -35px;" class="section">
-      <div class="d-flex flex-wrap align-items-stretch">
-        <div  class=" col-md-12 col-12  min-vh-100  bg-white">
-       
-          <x-guest-layout >
-    <x-jet-authentication-card >
-        <x-slot  name="logo">
-        <a href="{{URL::to('/')}}"><img  src="{{URL::to('public/assets/img/LOGO-23D.png')}}" style="width: 200px; height:70px; " alt="" class="thumbnail-sm img-responsive mt-2" ></a>
-          
-        </x-slot>
+                            </div>
+           
+                        </div>
 
-        <x-jet-validation-errors class="mb-4" />
-<div class="text-danger text-center" id='error'></div>
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-center text-danger">
-                {{ session('status') }}
-            </div>
-        @endif
+                        <div class="col-lg-7 d-none d-lg-inline-block">
+                            <div class="account-block rounded-right">
+                                <div class="overlay rounded-right"></div>
+                                <!---<div class="account-testimonial">
+                                    <h4 class="text-white mb-4">This  beautiful theme yours!</h4>
+                                    <p class="lead text-white">"Best investment i made for a long time. Can only recommend it for other users."</p>
+                                    <p>- Admin User</p>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="email" value="{{ __('Email | Username') }}" />
-                <input id="email" style="border-radius: 10px;" class="block mt-1 w-full" type="text" name="email" :value="{{ old('username') ?: old('email') }}" required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <input id="password" style="border-radius: 10px;" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="row">
-                <div class="col-12 ">
-                 <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>              
                 </div>
-                   <div class="col-12">
-                   <x-jet-checkbox  onclick="myFunction()"/> <span class="ml-2 text-sm text-gray-600">{{ __('Show Password') }}</span>
-                   </div>
-                
+                <!-- end card-body -->
             </div>
+            <!-- end card -->
 
-            <div class="row mt-5">
-            <div class="col-md-6">
-            <a href="{{URL::to('forgot-my-password')}}" class="btn  btn-icon text-primary">Forgot Password?</a>
-            </div>
-            <div class="col-md-6">
-            <div class="flex items-center justify-end ">
-               
+            <!-- end row -->
 
-               <x-jet-button class="ml-4 login">
-                   {{ __('Log in') }}
-               </x-jet-button>
-           </div></div>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
-          
         </div>
-        <img style="display: none;" class="thumbnail" src="{{ asset('public/assets/img/unsplash/login-bg2.jpg') }}" >
-        
-      </div>
-    </section>
-  </div>
-
+        <!-- end col -->
+    </div>
+    <!-- Row -->
 </div>
  
   <!-- General JS Scripts -->

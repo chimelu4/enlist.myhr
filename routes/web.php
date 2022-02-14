@@ -51,9 +51,11 @@ Route::get('/about',[HomeController::class,'about']);
 Route::get('/services',[HomeController::class,'service']);
 Route::get('/pricing',[HomeController::class,'pricing']);
 Route::get('/contact',[HomeController::class,'contact']);
+Route::get('/register',[HomeController::class,'register']);
 Route::get('forgot-my-password', [HomeController::class,'forgotPassword']);
 Route::post('/reset-password-post', [HomeController::class,'resetPassword']); //filters admin and mobile users
 Route::get('/check-admin-login/{email}/{password}', [HomeController::class,'checkAdmin']); //filters admin and mobile users
+Route::POST('/check-user-reg', [HomeController::class,'checkReg']); //filters admin and mobile users
 Route::get('/change-password', function () {
   
 

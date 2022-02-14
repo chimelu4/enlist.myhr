@@ -121,7 +121,7 @@ $user = User::find(Auth::user()->id);
           DB::beginTransaction();
         $response = "0";
         try{
- $randAlpha = substr(str_shuffle( implode("",range("A","Z")) ),0,3);
+        $randAlpha = substr(str_shuffle( implode("",range("A","Z")) ),0,3);
         $bid = $randAlpha.date("ymd");
         $idphoto = $this->uploadImage($request->file('photoid'),"/useridfolder",$bid);           
        $passportpics = $this-> uploadImage($request->file('photo'),"/userphotofolder",$bid); 

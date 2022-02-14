@@ -140,8 +140,8 @@
                    <div class="no-bullets dropdown ">
                           <a href="#" class=" dropdown-toggle btn btn-dark" data-toggle="dropdown">Register </a>
                           <ul class="dropdown-menu " role="menu">
-                            <li class="no-bullets"><a  class="nav-link " href="{{URL::to('/post')}}">As Employer</a></li>
-                            <li class="no-bullets"><a  class="nav-link  " href="{{URL::to('/submitcv')}}">As Candidate</a></li>
+                            <li class="no-bullets"><a  class="nav-link " href="{{URL::to('register')}}">As Employer</a></li>
+                            <li class="no-bullets"><a  class="nav-link  " href="{{URL::to('register')}}">As Candidate</a></li>
                           </ul>
                       </div>
 </div>
@@ -173,7 +173,7 @@
         <!--/ Row end -->
 
         
-     <div class="container">
+     <div class="container logo-enlist">
      <div class="nav-search" style=" z-index:1999;">
             <span ><img src="{{URL::to('/')}}/public/frontend/assets/images/preloader.png"></i></span>
           </div><!-- Search end -->
