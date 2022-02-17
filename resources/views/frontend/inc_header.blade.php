@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="Enlist and Retain -- Apply and get the right jobs in major cities." name="description">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta content="Jobs, Careers, CV, Professionals, Entrepreneur, Work Ethics, Enlist and Retain" name="keywords">
 
     <div style="display:none" id="top-bar" class="top-bar">
@@ -140,8 +141,8 @@
                    <div class="no-bullets dropdown ">
                           <a href="#" class=" dropdown-toggle btn btn-dark" data-toggle="dropdown">Register </a>
                           <ul class="dropdown-menu " role="menu">
-                            <li class="no-bullets"><a  class="nav-link " href="{{URL::to('register')}}">As Employer</a></li>
-                            <li class="no-bullets"><a  class="nav-link  " href="{{URL::to('register')}}">As Candidate</a></li>
+                            <li class="no-bullets"><a href="{{URL::to('register')}}/employer" class="nav-link emp-reg " data-id="1" href="">As Employer</a></li>
+                            <li class="no-bullets"><a  href="{{URL::to('register')}}/candidate" class="nav-link  can-reg" data-id="2" href="">As Candidate</a></li>
                           </ul>
                       </div>
 </div>

@@ -1,13 +1,13 @@
 <?php use Illuminate\Support\Facades\Auth;?>
 
-@include('header')
+@include('admin.header')
 @if ($page != "index")
-   @include('navbar')
+   @include('admin.navbar')
 @endif
      
       @yield('css')
       @yield('content')      
     
       
-    @include('footer')
+    @include('admin.footer')
   @yield('js')

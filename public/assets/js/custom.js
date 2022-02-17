@@ -86,26 +86,6 @@ if ($('#photog').length > 0) {
   
 
   
-   //checking username
-   $('#uname').focusout(function() {   
-    var un = $(this).val();
-   
-             $.ajax({  
-                  url:"check-username/"+un,  
-                  type:"get",  
-                  success:function(data)  
-                  {  
-                    if(data == 1){
-                      $('#unerror').text('Username is already in use');
-                }else {
-                $('#unerror').text('');
-                }
-
-                  }  
-             });  
-         
-    
-   }); 
 
    //checking email
   /*  $('#email').focusout(function() {   
@@ -130,29 +110,9 @@ if ($('#photog').length > 0) {
       */
 
 
-   //checking phone
-   $('#phone').focusout(function() {   
-    var ph = $(this).val();
-   
-             $.ajax({  
-                  url:"check-phone/"+ph,  
-                  type:"get",  
-                  success:function(data)  
-                  {  
-                    if(data == 1){
-                      $('#phoneerror').text('Phone is already in use');
-                }else {
-                $('#phoneerror').text('');
-                }
+  
 
-                  }  
-             });  
-         
-    
-   }); 
-     
-
-   $("#submit").click(function(e){
+   $("#submitl").click(function(e){
     e.preventDefault();
     
     var un = $("#uname").val();

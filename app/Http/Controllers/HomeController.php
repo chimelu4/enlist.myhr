@@ -208,8 +208,7 @@ DB::beginTransaction();
 }
 
 public function checkReg(Request $request){
-
-    $emailOrNumber = $request->input('email');
+    $email = $request->input('email');
     $un = $request->input('un');
     $fname = $request->input('fname');
     $gender = $request->input('gender');
@@ -218,55 +217,34 @@ public function checkReg(Request $request){
     $cpassword = $request->input('cpassword');
 
     if($fname == ""){
-        return "Please enter your fullname ";
-    }else if($emailOrNumber == ""){
-        return "Please enter a valid email or phone number ";
-    }else if(is_numeric($emailOrNumber) && strlen($emailOrNumber)<11){
-        return "Please enter a valid phone number ";
-    }else if(is_numeric($emailOrNumber) && User::where('phone',$emailOrNumber)->first()??0>0){
-        return "There is already a user with this phone number ";
-    }else if(!is_numeric($emailOrNumber) && !filter_var($emailOrNumber, FILTER_VALIDATE_EMAIL)){
-        return "Please enter a valid email address ";
-    }else if(!is_numeric($emailOrNumber) && filter_var($emailOrNumber, FILTER_VALIDATE_EMAIL) && User::where('email',$emailOrNumber)->first()??0>0){
-        return "There is already a user with this email address ";
+        $response = "Please enter your fullname ";
+    }else if($email ==""){
+        $response = "Email cannot be empty ";
+    }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $response = "Please enter a valid email address ";
+    }else if( User::where('email',$email)->first()??0>0){
+        $response = "There is already a user with this email address ";
     }else if($un =="" ){
-        return "Select a username ";
+        $response = "Select a username ";
     }else if($un !="" && User::where('username',$un)->first()??0>0){
-        return "Sorry username already taken";
+        $response = "Sorry username already taken";
     }else if($gender ==""){
-        return "Select Gender";
+        $response = "Select Gender";
     }else if(strlen($password)<8){
-        return "Passwords must be 8 or more characters in length";
+        $response = "Passwords must be 8 or more characters in length";
     }else if($cpassword != $password){
         return "Passwords do not match";
     }else if($type == ""){
-        return "Select account type";
+        $response = "Select account type";
+    }else if($type != 1 && $type !=2){
+        $response = "Invalid Type";
     }else{
         
-        $bid = generateBid();
-        DB::beginTransaction();
-        try{
-            $user = new User();
-            $user->bid = $bid;
-            $user->fullname = $fname;
-            $user->username = $un;
-            if(!is_numeric($emailOrNumber)){
-                $user->email = $emailOrNumber;
-            }else{
-                $user->phone = $emailOrNumber;
-            }         
-           $user->password = Hash::make($password);//default password for user to reset
-            $user->gender = $gender;
-            $user->account_type = $type;
-            $user->save();
-            DB::commit();
             
-            return 1;
-    }catch(\Exception $e){
-        $e->getMessage();
-        DB::rollback();
-    }
+            $response = 1;
+    
 }
+return $response;
 }
 
 /* public function notifications(){

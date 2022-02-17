@@ -1,5 +1,5 @@
 <?php $page="allstaff"; ?>
-@extends('master')
+@extends('admin.master')
 
 @section('content')
 
@@ -22,7 +22,7 @@
           <div class="section-body">
          
    <div class="container">
-   <form class="needs-validation"  class="formvalues" name="userinfo" enctype="multipart/form-data" novalidate=""  >
+   <form class="needs-validation"  class="formvalues" name="addStaff" enctype="multipart/form-data" novalidate=""  >
                   
                   
                   <div  class="card-body container">
@@ -114,20 +114,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Means of ID Type</label>
-                      <div class="col-sm-9">
-                        <select class="form-control" required="" name="idtype" id="role">
-                        <option value="" selected disabled>Select ID Type</option>
-                        @foreach ($id_type as $idt)
-                          <option value="{{$idt->id}}">{{$idt->name}}</option>
-                        @endforeach
-                        </select>
-                        <div class="invalid-feedback">
-                          Assign role to staff!
-                        </div>
-                      </div>
-                    </div>
+                   
                     
                         </div>
                         <div class="col-md-4">
@@ -139,14 +126,7 @@
                          No file selected?
                         </div>
                             </div><br>
-                            <div class="col-md-12">
-                            <div class="photo-holder"><img id="idholder" src=""  width="150px" height="150px"></div>
-                            <label class=" col-form-label">Means of ID</label>                        
-                         <input type="file" value="choose" required="" name="photoid" id="photoid">
-                         <div class="invalid-feedback">
-                         No file selected?
-                        </div>
-                            </div>
+                           
                            
                         </div>
 
@@ -156,7 +136,7 @@
                  
                 </form>
 <div  class="text-center">
-                    <button class="btn btnAddUser btn-primary" id="submit">Submit</button>
+                    <button class="btn btnAddStaff btn-primary" id="submit">Submit</button>
                   </div>
   
 
@@ -167,4 +147,59 @@
       </div>
     
      
+@endsection
+@section('js')
+
+<script>
+$(document).ready(function(){
+  $('.spin').hide();
+//adding jobrole
+$("#btnAddStaff").on("click", function(event){
+      event.preventDefault();
+      $('.spin').show();
+var form = document.forms.namedItem("addStaff");
+var formData = new FormData(form);
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$.ajax({
+  type:'post',
+    url:'{{URL::to('/')}}/admin/create/staff',
+    data:formData, 
+    processData: false,
+    contentType: false,
+    success: function(data){
+      if(data == 1){
+        $('.spin').hide();
+        Fnon.Hint.Success('Staff added successfully. Good Start!', {
+          position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
+          animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
+         callback:function(){
+          // callback
+          }
+        });
+location.reload(true);
+
+}else  {
+    $('.spin').hide();
+  Fnon.Hint.Danger(data, {
+    position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
+          animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
+         callback:function(){
+          // callback
+          }
+  });
+}
+
+    }
+
+}) ;      
+      
+      
+  });
+
+});
+  </script>
 @endsection

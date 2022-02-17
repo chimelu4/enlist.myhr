@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Login &mdash; EnlistAndRetain</title>
-
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
-
   <link rel="stylesheet" href="{{ URL::to('/') }}/public/assets/css/style.css">
   <link rel="stylesheet" href="{{URL::to('/')}}/public/frontend/assets/css/style.css">
   <!-- Extra styling for the services page  -->
@@ -26,7 +25,7 @@ body{
 }
 .account-block {
     padding: 0;
-    background-image: url('public/frontend/assets/images/auth/login.jpg');
+    background-image: url('../public/frontend/assets/images/auth/login.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -65,10 +64,10 @@ body{
   </style>
  
 <div id="main-wrapper" >
-<a href="{{URL::to('/')}}"><div class="ml-5  overlay-logo">
+<a href="{{URL::to('/')}}" class="ml-5">
     <img width="70" height="30" src="{{URL::to('/')}}/public/frontend/assets/images/footer-logo.png" alt="">
-    </div></a>
-    <div class="row justify-content-center pl-5">
+    </a>
+    <div class="row justify-content-center pt-5">
         <div class="col-xl-10 col-md-10 col-sm-12">
             <div class="card border-0">
                 <div class="card-body p-0">
@@ -79,8 +78,8 @@ body{
                                     <!---<img width="100" height="50" src="{{URL::to('/')}}/public/frontend/assets/images/footer-logo.png" alt="">--->
                                 </div>
 
-                                <h4 class=" mb-4">Welcome back!</h4>
-                                <div class="text-danger text-center" id='error'></div>
+                                <h4 class=" mb-4 text-primary">Admin Panel</h4>
+                                
                                 @if (session('status'))
                                     <div class="mb-4 font-medium text-sm text-center text-danger">
                                         {{ session('status') }}
@@ -88,10 +87,10 @@ body{
                                 @endif
                                 <p class="text-muted mt-2 mb-2">Enter your email address and password to access admin panel.</p>
 
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('admin.signin') }}">
                                 @csrf
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email | Username</label>
+                                        <label for="exampleInputEmail1">Your Email Address</label>
                                         <input type="text" class="form-control" id="email" required autofocus name="email" :value="{{ old('username') ?: old('email') }}">
                                     </div>
                                     <div class="form-group mb-2">
@@ -103,16 +102,16 @@ body{
                                     <x-jet-checkbox id="remember_me" name="remember" />
                                         <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>              
                                     </div>
-                                      <div class="col-12">
+                                      <div class="col-6 float-left">
                                       <x-jet-checkbox  onclick="myFunction()"/> <span class="ml-2 text-sm text-gray-600">{{ __('Show Password') }}</span>
                                       </div>
                                     
                                 </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                    <a href="{{URL::to('forgot-my-password')}}" class="forgot-link float-right text-primary">Forgot password?</a>
+                                <div class="text-danger text-center mb-2" id='error'></div>
+                                    <button type="submit" class="btn btn-primary login">Login</button>
+                                    <a href="{{URL::to('admin/forgot-my-password')}}" class="forgot-link float-right text-primary">Forgot password?</a>
                                 </form>                 
-            <p class="text-muted text-center  ">Don't have an account? <a href="{{URL::to('register')}}" class="text-primary ml-1">register</a></p>
-
+           
                             </div>
            
                         </div>
@@ -167,7 +166,7 @@ body{
     
 $(document).ready(function(){
  //alert('ready');
-  $(".login").click(function(e){
+  $(".logiln").click(function(e){
   e.preventDefault();
   
   var email = $("#email").val();
@@ -176,7 +175,8 @@ $(document).ready(function(){
  
   $.ajax({  
        url:"check-admin-login/"+email+"/"+password,  
-       type:"get",  
+       type:"post",
+       data:{email:email,password:password},
        success:function(data)  
        {  
          if(data == 0){  

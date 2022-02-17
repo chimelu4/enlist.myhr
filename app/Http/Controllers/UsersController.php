@@ -568,23 +568,6 @@ public function checkforunique($un,$em,$ph){
   
 }
 
-public function reset($id){
-
-    $response=0;
-    try{
-
-        $user = User::find($id);
-        $user->password = Hash::make("12345678");//default password for user to reset
-        if($user->save()){
-            //report_it("Reset a user password " .$user->fullname);
-$response = 1;
-        }
-    } catch(\Exception $e){
-        $response= $e->getMessage();
-    }
-
-    echo $response;
-}
 
 
 /**

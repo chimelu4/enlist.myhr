@@ -1,6 +1,6 @@
 <?php $page='home';
 use Carbon\Carbon;?>
-@extends('master')
+@extends('admin.master')
 
 @section('css')
 <style>

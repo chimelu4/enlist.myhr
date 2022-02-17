@@ -1,5 +1,5 @@
 <?php $page="allstaff"; ?>
-@extends('master')
+@extends('admin.master')
 @section('content')
 <?php   use \App\Http\Controllers\JobroleController; ?>
 <?php   use \App\Http\Controllers\IdentificationController; ?>
@@ -46,7 +46,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                       @foreach ($users as $user)
+                       @foreach ($admin as $user)
                           <tr>
                              <td>
                               <div class="sort-handler">
@@ -74,7 +74,7 @@
                       <a  href="#" data-id="{{$user->id}}"  class="dropdown-item banUser">@if ($user->status==1)
                         Ban @else Activate
                       @endif</a>               
-                      <a  href="{{URL::to('/edit-staff')}}/{{$user->id}}"  class="dropdown-item">Edit</a>               
+                      <a  href="{{URL::to('/admin/edit-staff')}}/{{$user->id}}"  class="dropdown-item">Edit</a>               
                              <a href=""  data-id="{{$user->id}}"   class="dropdown-item delete-user ">Delete</a>
                       </div>
                     </div>

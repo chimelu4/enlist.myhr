@@ -19,23 +19,21 @@ class CreateUsersTable extends Migration
             $table->string('bid')->unique();
             $table->string('fullname');
             $table->string('username')->unique();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();            
-            $table->string('phone')->unique();
+            $table->string('phone')->unique()->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->string('gender');
-            $table->string('address');
-            $table->string('comment',255);
-            $table->integer('salary');
-            $table->integer('job_role')
-            ->Reference('id')->on('job_role')
-            ->onDelete('restrict');
+            $table->string('address')->nullable();
+            $table->string('dob')->nullable();
+            $table->string('comapny')->nullable();
+            $table->string('comapny_addr')->nullable();
+            $table->string('comapny_phone')->nullable();
+            $table->string('company_position')->nullable();
+            $table->integer('account_type');            
              $table->integer('status')->default('1');
-             $table->string('passport');
-             $table->string('idphoto');
-             $table->string('id_type') ->Reference('id')->on('identifications')
-             ->onDelete('restrict');
+             $table->string('passport')->nullable();
              $table->string('app_token')->nullable();
             $table->timestamps();
         });

@@ -15,7 +15,6 @@ class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    use SoftDeletes;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
@@ -66,8 +65,5 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function Guarantor()
-    {
-        return $this->hasMany(Guarantor::class,'bid', 'bid');
-    }
+    
 }

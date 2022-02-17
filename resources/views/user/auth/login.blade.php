@@ -26,7 +26,7 @@ body{
 }
 .account-block {
     padding: 0;
-    background-image: url('public/frontend/assets/images/auth/login.jpg');
+    background-image: url('public/frontend/assets/images/auth/register.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -65,10 +65,10 @@ body{
   </style>
  
 <div id="main-wrapper" >
-<a href="{{URL::to('/')}}"><div class="ml-5  overlay-logo">
+<a href="{{URL::to('/')}}" class="ml-5">
     <img width="70" height="30" src="{{URL::to('/')}}/public/frontend/assets/images/footer-logo.png" alt="">
-    </div></a>
-    <div class="row justify-content-center pl-5">
+    </a>
+    <div class="row justify-content-center pt-5">
         <div class="col-xl-10 col-md-10 col-sm-12">
             <div class="card border-0">
                 <div class="card-body p-0">
@@ -86,13 +86,13 @@ body{
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <p class="text-muted mt-2 mb-2">Enter your email address and password to access admin panel.</p>
+                                <p class="text-muted mt-2 mb-2">Enter your email address and password to access continue.</p>
 
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('user.signin') }}">
                                 @csrf
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email | Username</label>
-                                        <input type="text" class="form-control" id="email" required autofocus name="email" :value="{{ old('username') ?: old('email') }}">
+                                        <input type="email" class="form-control" id="email" required autofocus name="email" :value="{{ old('username') ?: old('email') }}">
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="exampleInputPassword1">Password</label>
@@ -108,10 +108,27 @@ body{
                                       </div>
                                     
                                 </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                    <a href="{{URL::to('forgot-my-password')}}" class="forgot-link float-right text-primary">Forgot password?</a>
+                                    <button type="submit" class="btn btn-primary mt-2"></i>Login</button>
+                                    <a href="{{URL::to('user/forgot-my-password')}}" class="forgot-link float-right text-primary">Forgot password?</a>
                                 </form>                 
-            <p class="text-muted text-center  ">Don't have an account? <a href="{{URL::to('register')}}" class="text-primary ml-1">register</a></p>
+           
+               <div class="row justify-content-center">
+                   <col-xl-6>
+                   <p class="text-muted text-center  mr-2">Don't have an account? </P>
+                </col-xl-6>
+                <col-xl-6>
+                <div class="no-bullets dropright text-align-center ">
+                          <a href="#" class=" dropdown-toggle" data- data-toggle="dropdown">Register </a>
+                          <ul class="dropdown-menu " role="menu">
+                            <li class="no-bullets"><a href="{{URL::to('register')}}/employer" class="nav-link emp-reg " data-id="1" href="">As Employer</a></li>
+                            <li class="no-bullets"><a  href="{{URL::to('register')}}/candidate" class="nav-link  can-reg" data-id="2" href="">As Candidate</a></li>
+                          </ul>
+                      </div>
+            </col-xl-6>
+
+               </div>
+                
+                
 
                             </div>
            
@@ -168,25 +185,7 @@ body{
 $(document).ready(function(){
  //alert('ready');
   $(".login").click(function(e){
-  e.preventDefault();
-  
-  var email = $("#email").val();
-  var password = $("#password").val();
-
- 
-  $.ajax({  
-       url:"check-admin-login/"+email+"/"+password,  
-       type:"get",  
-       success:function(data)  
-       {  
-         if(data == 0){  
-           $("#error").text('Bad gateway.')
-     }else if(data ==1) {
-          $(".login").unbind('click').click();
-     }
-
-       }  
-  });  
+     
 });
 });
 
