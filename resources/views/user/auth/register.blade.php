@@ -33,6 +33,15 @@ body{
     height: 100%;
     position: relative;
 }
+@media only screen and (max-width: 992px){
+    .mobile{
+        background: #ff4500;
+        color: #fff !important;
+        padding: 5px;
+        font-size: 11px;
+        text-align: center;
+    }
+}
 .form-group{
     margin-bottom:3px;
 }
@@ -95,7 +104,10 @@ body{
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                              
+                                <div class="mobile text-muted mt-2 mb-2">
+                                     <p >All fields are required.</p>
+
+                                </div>
                                 <form method="POST" class="reg-form" action="{{ route('user.signup') }}">
                                 @csrf
                                    <div class="row">

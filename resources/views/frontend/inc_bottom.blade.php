@@ -20,8 +20,12 @@
   <script src="{{URL::to('/')}}/public/frontend/assets/plugins/google-map/map.js" defer></script>
 
   <!-- Template custom -->
-  <script src="{{URL::to('/')}}/public/frontend/assets/js/script.js"></script><script>
+  <script src="{{URL::to('/')}}/public/frontend/assets/js/script.js"></script>
+  
+  
+  <script>
 $(document).ready(function(){
+ 
 
 
 });

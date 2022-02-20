@@ -1,4 +1,4 @@
-<?php $page='settings';?>
+<?php $page='employer';?>
 @extends('admin.master')
 @section('content')
 <?php   use \App\Http\Controllers\JobroleController; ?>

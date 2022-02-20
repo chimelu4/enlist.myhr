@@ -11,8 +11,8 @@
           <div  class="section-header">
           <nav aria-label="breadcrumb">
                       <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{URL::to('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/all-staff')}}"><i class="fas fa-list"></i> All Staff</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/all-staff')}}"><i class="fas fa-list"></i> All Staff</a></li>
                         <li class="breadcrumb-item " aria-current="page">Add Staff</li>
                       </ol>
                     </nav>
@@ -92,6 +92,7 @@
                       <div class="col-sm-9">
                         <select class="form-control" required="" name="gender" id="gender">
                         <option value="" selected disabled>Choose gender</option>
+                            <option selected disabled>Choose</option>
                             <option value="female">Female</option>
                             <option value="male">Male</option>
                         </select>
@@ -105,6 +106,7 @@
                       <div class="col-sm-9">
                         <select class="form-control" required="" name="role" id="role">
                         <option value="" selected disabled>Assign Jobrole</option>
+                        <option selected disabled>Choose</option>
                         @foreach ($jobroles as $jobrole)
                           <option value="{{$jobrole->id}}">{{$jobrole->name}}</option>
                         @endforeach
@@ -136,7 +138,7 @@
                  
                 </form>
 <div  class="text-center">
-                    <button class="btn btnAddStaff btn-primary" id="submit">Submit</button>
+                    <button class="btn btnAddStaff btn-primary" id="submit"><i class="fa fa-spinner fa-spin spin"></i>Submit</button>
                   </div>
   
 
@@ -154,7 +156,7 @@
 $(document).ready(function(){
   $('.spin').hide();
 //adding jobrole
-$("#btnAddStaff").on("click", function(event){
+$(".btnAddStaff").on("click", function(event){
       event.preventDefault();
       $('.spin').show();
 var form = document.forms.namedItem("addStaff");

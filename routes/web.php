@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\IndustryController;
+use App\Http\Controllers\JobpostController;
 use App\Http\Controllers\JobroleController;
+use App\Http\Controllers\JobtypesController;
+use App\Http\Controllers\QualificationController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,11 +94,41 @@ Route::middleware(['middleware'=> 'auth:web'])->group(function () {
  Route::post('/admin/reset-admin-password/{id}', [AdminAuthController::class,'reset']);//this delete a user
   Route::get('/admin/activate-ban-user/{id}', [AccounttypeController::class,'toggleActiveUser']);//this updates jobrole value
 
+  Route::get('/admin/activate-ban-staff/{id}', [AdminAuthController::class,'toggleActiveUser']);//this updates jobrole value
   Route::get('/admin/all-staff', [AdminAuthController::class,'all']);
   Route::get('/admin/add-staff', [AdminAuthController::class,'create']); //shows create form
   Route::get('/admin/edit-staff/{id}', [AdminAuthController::class,'editStaff']);//this shows single row for staff edit
   Route::post('/admin/update/staff', [AdminAuthController::class,'updateStaff']);//this updates jobrole value
-    
+
+  //industries
+  Route::get('/admin/all-industries', [IndustryController::class,'index']);//this updates value
+  Route::post('/admin/store-industry', [IndustryController::class,'store']);//this updates value
+  Route::get('/admin/get-industry-value/{id}', [IndustryController::class,'show']);//this updates value
+  Route::post('/admin/update-industry', [IndustryController::class,'update']);//this updates value
+  Route::get('/admin/delete-industry/{id}', [IndustryController::class,'destroy']);//this updates value
+  
+  //job types
+  Route::get('/admin/all-job-types', [JobtypesController::class,'index']);//this updates value
+  Route::post('/admin/store-job-type', [JobtypesController::class,'store']);//this updates value
+  Route::get('/admin/get-job-type-value/{id}', [JobtypesController::class,'show']);//this updates value
+  Route::post('/admin/update-job-type', [JobtypesController::class,'update']);//this updates value
+  Route::get('/admin/delete-job-type/{id}', [JobtypesController::class,'destroy']);//this updates value
+  
+  //qualifiationsQualification
+  Route::get('/admin/all-qualifications', [QualificationController::class,'index']);//this updates value
+  Route::post('/admin/store-qualification', [QualificationController::class,'store']);//this updates value
+  Route::get('/admin/get-qualification-value/{id}', [QualificationController::class,'show']);//this updates value
+  Route::post('/admin/update-qualification', [QualificationController::class,'update']);//this updates value
+  Route::get('/admin/delete-qualification/{id}', [QualificationController::class,'destroy']);//this updates value 
+  
+  //job posts
+  Route::get('admin/all-job-posts', [JobpostController::class,'index']);//this updates value
+  Route::get('/admin/post-job', [JobpostController::class,'create']);//this updates value
+  Route::post('/admin/store-post', [JobpostController::class,'store']);//this updates value
+  Route::get('/admin/get-post-value/{id}', [JobpostController::class,'show']);//this updates value
+  Route::post('/admin/update-post', [JobpostController::class,'update']);//this updates value
+  Route::get('/admin/delete-post/{id}', [JobpostController::class,'destroy']);
+
 
   
   Route::post('/admin/save-id-type', [IdentificationController::class,'store']);// this enters tp db, call by form

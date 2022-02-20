@@ -41,6 +41,16 @@ body{
     left: 0;
     right: 0;
 }
+@media only screen and (max-width: 992px){
+    .mobile{
+        background: #ff4500;
+        color: #fff;
+        padding: 5px;
+        font-size: 11px;
+        text-align: center;
+    }
+}
+
 .account-block .account-testimonial {
     text-align: center;
     color: #fff;
@@ -85,8 +95,11 @@ body{
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <p class="text-muted mt-2 mb-2">Enter your email address and password to access admin panel.</p>
+                                <div class="mobile text-center mt-2 mb-2">
+                                     <p >Enter your email address and password to access admin panel.</p>
 
+                                </div>
+                               
                                 <form method="POST" action="{{ route('admin.signin') }}">
                                 @csrf
                                     <div class="form-group">

@@ -99,11 +99,11 @@
       </div><!-- Container end -->
     </div>
   
-    <div style="background-color:#ff4500"class="site-navigation">
+    <div style="background-color:#ff4500"class="site-navigation ">
     <div  class="container">
         <div class="row">
           <div class="col-lg-12">
-              <nav class="navbar navbar-expand-lg navbar-dark  p-0 ml-4">
+              <nav class="navbar navbar-expand-lg navbar-dark p-0 ml-4">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -133,15 +133,15 @@
 
                      
                     </ul>
-                   <div  class="call flex-wrap">
+                   <div  class="call  flex-wrap">
                    <div class="btn-group" role="group" aria-label="Basic example">
                    <div class="mr-1">
                       <a class="btn btn-dark" href="{{URL::to('/login')}}"><i class="text-white fa fa-sign-out-alt"></i>Login</a>
                       </div>
                    <div class="no-bullets dropdown ">
-                          <a href="#" class=" dropdown-toggle btn btn-dark" data-toggle="dropdown">Register </a>
-                          <ul class="dropdown-menu " role="menu">
-                            <li class="no-bullets"><a href="{{URL::to('register')}}/employer" class="nav-link emp-reg " data-id="1" href="">As Employer</a></li>
+                          <a href="#" class=" dropdown-toggle btn topdrop btn-dark" data-toggle="dropdown">Register </a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li class="no-bullets dropc"><a href="{{URL::to('register')}}/employer" class="nav-link emp-reg " data-id="1" href="">As Employer</a></li>
                             <li class="no-bullets"><a  href="{{URL::to('register')}}/candidate" class="nav-link  can-reg" data-id="2" href="">As Candidate</a></li>
                           </ul>
                       </div>

@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\industry;
+use App\Models\jobtypes;
 use Illuminate\Http\Request;
 
-class IndustryController extends Controller
+class JobtypesController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-      $industries = industry::orderBy('name','asc')->get();
+      $types = jobtypes::orderBy('name','asc')->get();
 
-      return view('admin.industries.all-industries',compact('industries'));
+      return view('admin.job-types.all-job-types',compact('types'));
     }
 
     /**
@@ -41,9 +41,9 @@ class IndustryController extends Controller
         if($name ==""){
             return "Name cannot be empty";
         }else{
-            $industry = new industry();
-            $industry->name = $name;
-            if($industry->save()){
+            $type = new jobtypes();
+            $type->name = $name;
+            if($type->save()){
                 return 1;
             }else{
                 return " Cannot save data at the moment";
@@ -59,11 +59,11 @@ class IndustryController extends Controller
      */
     public function show($id)
     {
-        $industry = industry::find($id);
+        $type = jobtypes::find($id);
         
         return response()->json([
-            'name' => $industry->name, 
-            'id' => $industry->id
+            'name' => $type->name, 
+            'id' => $type->id
         ]);
 
     }
@@ -74,10 +74,7 @@ class IndustryController extends Controller
      * @param  \App\Models\industry  $industry
      * @return \Illuminate\Http\Response
      */
-    public function edit(industry $industry)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -94,9 +91,9 @@ class IndustryController extends Controller
        if($name==""){
            return "You must enter a name to continue";
        }else{
-           $industry = industry::where('id',$id)->first();
-           $industry->name = $name;
-           if($industry->save()){
+           $type = jobtypes::where('id',$id)->first();
+           $type->name = $name;
+           if($type->save()){
                return 1;
            }
        }
@@ -110,7 +107,7 @@ class IndustryController extends Controller
      */
     public function destroy( $id)
     {
-      industry::find($id)->delete();
+      jobtypes::find($id)->delete();
 
       return 1;
     }

@@ -1,4 +1,4 @@
-<?php $page='settings'; ?>
+<?php $page='employer'; ?>
 @extends('admin.master')
 @section('content')
 
@@ -198,7 +198,7 @@
                       <div class="row">
                           <div class="col-md-8">
                           <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Comapny Name</label>
+                        <label class="col-sm-3 col-form-label">Comapany Name</label>
                         <div class="col-sm-9">
                           <input type="text" class="form-control" value="{{$data->company}}"   name="cname" id="cname">
                           

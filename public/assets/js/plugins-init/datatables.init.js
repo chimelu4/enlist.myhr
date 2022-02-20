@@ -43,7 +43,7 @@ let dataSet = [
 (function($) {
      "use strict"
     //example 1
-    var table = $('.example').DataTable({
+    var table = $('.table').DataTable({
         createdRow: function ( row, data, index ) {
            $(row).addClass('selected')
         } ,

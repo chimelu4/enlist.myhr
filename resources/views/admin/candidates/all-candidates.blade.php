@@ -1,4 +1,4 @@
-<?php $page='settings';?>
+<?php $page='candidate';?>
 @extends('admin.master')
 @section('content')
 <?php   use \App\Http\Controllers\JobroleController; ?>

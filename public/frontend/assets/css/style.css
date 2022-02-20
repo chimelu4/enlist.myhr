@@ -3945,3 +3945,10 @@ ul.no-bullets {
   height: 120px;
   margin-top:4px;
 }
+
+@media only screen and (max-width:992px){
+  .call{
+    height:120px;
+    padding: 0px;
+  }
+}

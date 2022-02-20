@@ -82,4 +82,8 @@
       </div><!-- Container end -->
     </div><!-- Copyright end -->
   </footer><!-- Footer end -->
+  <script>
+    
+    });
+  </script>
   @include('frontend.inc_bottom')

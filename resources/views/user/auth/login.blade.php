@@ -24,6 +24,17 @@
 body{
     margin-top:20px;
 }
+@media only screen and (max-width: 992px){
+    .mobile{
+        background: #ff4500;
+        color: #fff;
+        padding: 5px;
+        font-size: 11px;
+        text-align: center;
+    }
+}
+
+
 .account-block {
     padding: 0;
     background-image: url('public/frontend/assets/images/auth/register.jpg');
@@ -86,16 +97,19 @@ body{
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <p class="text-muted mt-2 mb-2">Enter your email address and password to access continue.</p>
+                                <div class="mobile  mt-2 mb-2">
+                                <p>Enter your email address and password to continue.</p>
+                                </div>
+                                
 
                                 <form method="POST" action="{{ route('user.signin') }}">
                                 @csrf
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email | Username</label>
+                                        <label for="exampleInputEmail1">Email:</label>
                                         <input type="email" class="form-control" id="email" required autofocus name="email" :value="{{ old('username') ?: old('email') }}">
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="exampleInputPassword1">Password</label>
+                                        <label for="exampleInputPassword1">Password:</label>
                                         <input type="password" class="form-control" id="password" name="password" >
                                     </div>
                                     <div class="row">

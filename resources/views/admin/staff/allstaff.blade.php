@@ -22,7 +22,7 @@
 <div ><div class="card">
                   
                   <div class="card-body">
-                  <a class="btn btn-primary mb-4" href="{{URL::to('add-staff')}}">New Staff</a>
+                  <a class="btn btn-primary mb-4" href="{{URL::to('/admin/add-staff')}}">New Staff</a>
 
                   <h6 class="ml-3">All Members</h6>
                <div class="container">
@@ -156,6 +156,37 @@ $(document).ready(function(){
           }
         }); 
     
+
+        $(document).on('click', '.banUser',function(e) {   
+    e.preventDefault();
+   var userid= $(this).data('id');
+
+            $.ajax({  
+                 url:"{{URL::to('/')}}/admin/activate-ban-staff/"+userid,  
+                 type:"get",  
+                 success:function(data)  
+                 {  
+                   if(data == 1){
+                   
+                    Fnon.Hint.Success('Done Successfully.', {
+                      position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
+                      animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
+                     callback:function(){
+                      // callback
+                      }
+                    });
+                     location.reload(false);
+               }else {
+                Fnon.Hint.Danger('Error detected. Record might be a duplicate', {
+                  callback:function(){
+                  // callback
+                  }
+                });
+               }
+
+                 }  
+            });   });  
+        
 
 });
 </script>

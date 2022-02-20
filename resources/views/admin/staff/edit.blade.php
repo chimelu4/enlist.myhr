@@ -108,6 +108,21 @@
                           </div>
                         </div>
                       </div>
+                      <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Job Role</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" required="" name="role" id="role">
+                        <option value="" selected disabled>Assign Jobrole</option>
+                        <option selected disabled>Choose</option>
+                        @foreach ($jobroles as $jobrole)
+                          <option value="{{$jobrole->id}}" {{ ( $data->job_role == $jobrole->id) ? 'selected' : '' }}>{{$jobrole->name}}</option>
+                        @endforeach
+                        </select>
+                        <div class="invalid-feedback">
+                          Assign role to staff!
+                        </div>
+                      </div>
+                    </div>
                           </div>                    
                           <div class="col-md-4">
                               <div class="col-md-12">
