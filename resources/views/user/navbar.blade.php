@@ -13,25 +13,19 @@
          <ul  class="sidebar-menu ">
           
           <li class="menu-header" >Menu</li>
-          <li><a class="nav-link <?php echo $page=="home"?'active':'';?>" href="{{URL::to('dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a class="nav-link <?php echo $page=="home"?'active':'';?>" href="{{URL::to('/user/dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
          <li class="nav-item dropdown ">
-            <a href="#" class="nav-link <?php echo $page=="accounts"?'active':'';?> has-dropdown"> <i class="fas fa-landmark"></i><span>Manage Staff</span></a>
+            <a href="#" class="nav-link <?php echo $page=="accounts"?'active':'';?> has-dropdown"> <i class="fas fa-landmark"></i><span>My Hires</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{URL::to('create-account')}}">All Staff</a></li>                
+              <li><a class="nav-link" href="{{URL::to('/user/company/hires')}}">All Hires</a></li>                
             </ul>
           </li> 
-           <li class="nav-item dropdown ">
-            <a href="#" class="nav-link <?php echo $page=="pendings"?'active':'';?> has-dropdown">  <i class="fas fa-users"></i><span>Job Posts</span></a>
-            <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{URL::to('unposted-report')}}">Create New</a></li>
-              <li class="active"><a class="nav-link" href="{{URL::to('unremmitted-variance')}}">All Job Post</a></li>                  
-            </ul>
-          </li>
+          
             <li  class="nav-item dropdown ">
             <a href="#" class="nav-link <?php echo $page=="reports"?'active':'';?> has-dropdown"><i class="fa fa-list"></i><span>About</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{URL::to('opening-reports')}}">My Profile</a></li>                  
-              <li><a class="nav-link" href="{{URL::to('opening-reports')}}">My Company</a></li>                  
+              <li><a class="nav-link" href="{{URL::to('/user/about')}}">My Profile</a></li>                  
+              <li><a class="nav-link" href="{{URL::to('/user/mycompany')}}">My Company</a></li>                  
             </ul>
           </li>           
           <li class="menu-header">Administration</li>
@@ -42,21 +36,19 @@
          <ul  class="sidebar-menu ">
           
           <li class="menu-header" >Menu</li>
-          <li><a class="nav-link <?php echo $page=="home"?'active':'';?>" href="{{URL::to('dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a class="nav-link <?php echo $page=="home"?'active':'';?>" href="{{URL::to('/user/dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
          <li class="nav-item dropdown ">
             <a href="#" class="nav-link <?php echo $page=="accounts"?'active':'';?> has-dropdown"> <i class="fas fa-landmark"></i><span>My Applications</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{URL::to('create-account')}}">Jobs Update</a></li>                
-              <li><a class="nav-link" href="{{URL::to('create-account')}}">Jobs Applied</a></li>                
-              <li><a class="nav-link" href="{{URL::to('create-account')}}">Jobs Rejected</a></li>                
+              <li><a class="nav-link" href="{{URL::to('/user/all-jobs')}}">All Jobs</a></li>                
             </ul>
           </li> 
            
             <li  class="nav-item dropdown ">
             <a href="#" class="nav-link <?php echo $page=="reports"?'active':'';?> has-dropdown"><i class="fa fa-list"></i><span>About Me</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{URL::to('opening-reports')}}">My Profile</a></li>                  
-              <li><a class="nav-link" href="{{URL::to('opening-reports')}}">My CV</a></li>                      
+              <li><a class="nav-link" href="{{URL::to('/user/about')}}">My Profile</a></li>                  
+              <li><a class="nav-link" href="{{URL::to('/user/cv')}}">My CV</a></li>                      
             </ul>
           </li>           
           <li class="menu-header">links</li>

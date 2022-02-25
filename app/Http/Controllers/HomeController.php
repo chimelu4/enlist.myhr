@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\accounttype;
+use App\Models\industry;
+use App\Models\jobpost;
+use App\Models\jobtypes;
+use App\Models\poststatus;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,7 +26,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $industries = industry::all();
+        $job_type = jobtypes::all();
+        $published = poststatus::where('name','published')->first();
+        $posts = jobpost::where('status',$published->id)->get();
+
+        return view('frontend.index',compact('industries','job_type','posts'));
+    }
+    
+    
+    public function postDetails($id)
+    {
+        $industries = industry::all();
+        $job_type = jobtypes::all();
+        $post = jobpost::find($id);
+
+        return view("frontend.post",compact('industries','job_type','post'));
     }
      public function about()
     {

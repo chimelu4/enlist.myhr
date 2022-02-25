@@ -85,9 +85,12 @@ body{
     </select>
     <select class="form-control location mr-1 col-xl-3" name="industry" >
     <option disabled selected>Select Industry</option>
-      <option value="accounting">Accounting</option>
+    @foreach ($industries as $industry )
+        <option value="{{$industry->id}}">{{$industry->name}}</option>
+    @endforeach
+    
     </select>    
-    <input type="text" class="form-control search mr-1 col-xl-3" placeholder="Enter key word">
+    <input type="text" class="form-control search mr-1 col-xl-3" placeholder="Enter keyword">
     <div class="input-group-append">
       <a  class="btn btn-dark">Search</a>
     </div>
@@ -124,7 +127,7 @@ body{
       <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
          aria-controls="collapseOne1">
         <h5 class="mb-0 ">
-         Category <i class="fas fa-angle-down rotate-icon "></i>
+         Industry <i class="fas fa-angle-down rotate-icon "></i>
         </h5>
       </a>
     </div>
@@ -134,12 +137,10 @@ body{
          data-parent="#accordionEx">
       <div class="card-body">
       <ul class="no-bullets">
-      <li><b>All Categories</b></li>
-      <li>Category 1</li>
-      <li>Category 2</li>
-      <li>Category 3</li>
-      <li>Category 4</li>
-      <li>Category 5</li>
+      <li><a class="industry" href="#"><b>All Industries</b></a></li>
+  @foreach ($industries as  $industry)
+    <li ><a class="industry" href="#" data-id="{{$industry->id}}">{{$industry->name}}</a></li>
+  @endforeach
 </ul>
       </div>
     </div>
@@ -165,9 +166,9 @@ body{
          data-parent="#accordionEx">
       <div class="card-body">
       <ul class="no-bullets">
-<li ><input type="checkbox" class="mr-1">Full-Time</li>
-<li><input type="checkbox" class="mr-1">Part-Time</li>
-<li><input type="checkbox" class="mr-1">Intern</li>
+      @foreach ($job_type as $type)
+      <li ><input type="checkbox" data-id="{{$type->id}}" class="mr-1 type">{{$type->name}}</li>
+      @endforeach
 
 </ul>
       </div>
@@ -195,9 +196,9 @@ body{
       <div class="card-body">
    <div class="box text-left">
    <ul class="no-bullets"><li><label>From:</lable></li>
-   <li><input type="number" placeholder="0" class=""></li>
+   <li><input type="number" placeholder="0" class="from"></li>
    <li><label>To:</lable></li>
-   <li><input type="number" placeholder="500000" class=""></li></ul>
+   <li><input type="number" placeholder="500000" class="to"></li></ul>
    </div>
    
    
@@ -216,168 +217,54 @@ body{
     
     <div  class="col-xl-10 col-md-10 col-sm-12 ">
       <div  class="btn-group btn-group-justified">
-  <a type="button" class="btn btn-dark ">This week</a>
-  <a type="button" class="btn btn-dark">This Month</a>
-  <a type="button" class="btn btn-dark">This Year</a>
-  <a type="button" class="btn btn-dark">Any Time</a>
+  <a type="button" class="btn btn-dark week ">This week</a>
+  <a type="button" class="btn btn-dark month">This Month</a>
+  <a type="button" class="btn btn-dark year">This Year</a>
+  <a type="button" class="btn btn-dark any">Any Time</a>
 </div> 
       </div>
     
     <div class="container mt-5 mb-3">
     <div class="row">
-        <div class="col-md-4">
+       @foreach ($posts as $post)
+       <div class="col-md-4">
             <div class="card p-3 mb-2">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex flex-row align-items-center">
                         <div class="ms-2 c-details">
-                            <h6 class="mb-0">Accounting</h6> <span>1 days ago</span>
+                            <h6 class="mb-2">{{getObjectName("industry",$post->industry)}}</h6> <span>{{$post->created_at->diffForHumans()}}</span>
                         </div>
                     </div>
-                    <a href="#"><div class="badge"> <span>Apply </span> </div></a>
+                    <a href="{{URL::to('/user/job/apply')}}/{{$post->id}}"><div class="badge"> <span>Apply </span> </div></a>
                 </div>
                 <div class="img">
-                  <img  src="{{URL::to('/')}}/public/frontend/assets/images/dwn.jpg" alt="">
+                  <img  src="{{URL::to('/')}}/public/{{$post->image}}"  alt="">
                 </div>
-                <div class="">
-                    <h6 class="heading">Senior Accountant</h6>
-                    <p class="heading text-secondary">Location:FCT - Garki</p>
-                    <div class="mt-5">
+                <div class="mt-1">
+                 <h6 class="heading">{{$post->job_title}}</h6>
+               <ul style="margin-left: -20px;">
+               <li> <a style="font-size:14px" href="{{URL::to('/jobpost')}}/{{$post->id}}" class="heading mb-0 badge">Location: {{ucfirst($post->location)}}</a></li>
+               <li> <a href="{{URL::to('/jobpost')}}/{{$post->id}}"><span style="font-size:14px" class="badge"> Salary: {{number_format($post->salary_from)}} and above</span></a>
+                    </li>
+               </ul>
+</div>
+                   <div class="mt-2">
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
+                        <div class="mt-1"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-        <div class="card p-3 mb-2">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                    <div class="ms-2 c-details">
-                            <h6 class="mb-0">Hospitality</h6> <span>3 days ago</span>
-                        </div>
+                    <div class="text-center">
+                      <a href="{{URL::to('/jobpost')}}/{{$post->id}}" class="btn btn-outline text-center"> View Job Post </a>
                     </div>
-                    <a href="#"><div class="badge"> <span>Apply </span> </div></a>
-                </div>
-                <div class="img">
-                  <img  src="{{URL::to('/')}}/public/frontend/assets/images/dwn2.jpg" alt="">
-                </div>
-                <div class="">
-                    <h6 class="heading">Supervisor</h6>
-                    <p class="heading text-secondary">Location:FCT - Lokogoma</p>
                     
-                    <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="mt-3"> <span class="text1">122 Applied <span class="text2">of 200 capacity</span></span> </div>
-                    </div>
-                </div>
+                   
+                </div>              
             </div>
+        
         </div>
-        <div class="col-md-4">
-        <div class="card p-3 mb-2">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="ms-2 c-details">
-                            <h6 class="mb-0">Ecommerce</h6> <span>1 days ago</span>
-                        </div>
-                    </div>
-                    <a href="#"><div class="badge"> <span>Apply </span> </div></a>
-                </div>
-                <div class="img">
-                  <img  src="{{URL::to('/')}}/public/frontend/assets/images/dwn3.jpg" alt="">
-                </div>
-                <div class="5">
-                    <h6 class="heading">Marketing Manager</h6>
-                    <p class="heading text-secondary">Location:FCT - Kuje</p>
-                    <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="mt-3"> <span class="text1">23 Applied <span class="text2">of 50 capacity</span></span> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!------second row ------>
-        <div class="col-md-4">
-            <div class="card p-3 mb-2">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="ms-2 c-details">
-                            <h6 class="mb-0">Accounting</h6> <span>1 days ago</span>
-                        </div>
-                    </div>
-                    <a href="#"><div class="badge"> <span>Apply </span> </div></a>
-                </div>
-                <div class="img">
-                  <img  src="{{URL::to('/')}}/public/frontend/assets/images/dwn.jpg" alt="">
-                </div>
-                <div class="m">
-                    <h6 class="heading">Senior Accountant</h6>
-                    <p class="heading text-secondary">Location:FCT - Garki</p>
-                    <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-        <div class="card p-3 mb-2">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                    <div class="ms-2 c-details">
-                            <h6 class="mb-0">Hospitality</h6> <span>3 days ago</span>
-                        </div>
-                    </div>
-                    <a href="#"><div class="badge"> <span>Apply </span> </div></a>
-                </div>
-                <div class="img">
-                  <img  src="{{URL::to('/')}}/public/frontend/assets/images/dwn2.jpg" alt="">
-                </div>
-                <div class="m5">
-                    <h6 class="heading">Supervisor</h6>
-                    <p class="heading text-secondary">Location:FCT - Lokogoma</p>
-                    
-                    <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="mt-3"> <span class="text1">122 Applied <span class="text2">of 200 capacity</span></span> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-        <div class="card p-3 mb-2">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="ms-2 c-details">
-                            <h6 class="mb-0">Ecommerce</h6> <span>1 days ago</span>
-                        </div>
-                    </div>
-                    <a href="#"><div class="badge"> <span>Apply </span> </div></a>
-                </div>
-                <div class="img">
-                  <img  src="{{URL::to('/')}}/public/frontend/assets/images/dwn3.jpg" alt="">
-                </div>
-                <div class="mt-">
-                    <h6 class="heading">Marketing Manager</h6>
-                    <p class="heading text-secondary">Location:FCT - Kuje</p>
-                    <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="mt-3"> <span class="text1">23 Applied <span class="text2">of 50 capacity</span></span> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       @endforeach
+     
     </div>
 </div>
     </div>

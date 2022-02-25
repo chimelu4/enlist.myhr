@@ -138,23 +138,5 @@ if ($('#photog').length > 0) {
     });  
  });
    
- //searc script
-  //checking username
-  $('#search-input').keyup(function() {   
-    var text = $(this).val();
-   
-             $.ajax({  
-                  url:"search/"+text,  
-                  type:"get",  
-                  success:function(data)  
-                  {  
-                   
-                      $('.search-result').html(data);
-              
-                  }  
-             });  
-         
-    
-   }); 
-             
+      
   });

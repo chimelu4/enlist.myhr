@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\admin;
 use App\Models\Identification;
 use App\Models\Jobrole;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +19,9 @@ class AdminAuthController extends Controller
     }
   public function home()
     {
-        return view('admin.dashboard');
+        
+            return view('admin.dashboard');
+        
     }
 
     public function login()
@@ -38,8 +40,7 @@ class AdminAuthController extends Controller
         {
             return redirect()->intended(route('admin.dashboard'))
             ->withSuccess('Signed in');
-            //return redirect()
-                //->route('');
+            
         }
 
         return redirect()
@@ -47,11 +48,11 @@ class AdminAuthController extends Controller
             ->with('status', 'Invalid Credentials');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::guard('webadmin')
-            ->logout();
-
+        Auth::guard('webadmin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()
             ->route('admin.login');
     }

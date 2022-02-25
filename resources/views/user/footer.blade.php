@@ -62,5 +62,29 @@
     <!-- Page Specific JS File -->
     <script src="{{ asset('public/assets/js/page/components-table.js') }}"></script>
     <script src="{{ asset('public/assets/js/page/modules-ion-icons.js') }}"></script>
+  <script>
+$(document).ready(function(){
+
+ //searc script
+ $('#search-input').keyup(function() {   
+    var text = $(this).val();
+   
+             $.ajax({  
+                  url:"{{URL::to('/')}}/user/search/"+text,  
+                  type:"get",  
+                  success:function(data)  
+                  {  
+                   
+                      $('.search-result').html(data);
+              
+                  }  
+             });  
+         
+    
+   }); 
+
+})
+
+  </script>
 </body>
 </html>

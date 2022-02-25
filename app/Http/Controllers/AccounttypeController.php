@@ -75,7 +75,7 @@ class AccounttypeController extends Controller
         DB::beginTransaction();
         try{
       if($request->file('photo') !=''){
-        $passportpics = checkImage($request->file('photo'),$oldPassport,"/admin/userphotofolder",$bid); 
+        $passportpics = checkImage($request->file('photo'),$oldPassport,"/userphotofolder",$bid); 
              
                     $user->fullname = $request->input('fname');
                     $user->username = $request->input('uname');

@@ -32,8 +32,11 @@
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{{URL::to('admin/all-job-posts')}}">All Job Posts</a></li>
                   <li class="active"><a class="nav-link" href="{{URL::to('admin/post-job')}}">Post Job</a></li>                  
+                  <li class="active"><a class="nav-link" href="{{URL::to('admin/all-applications')}}">Job Applications</a></li>                  
                 </ul>
-              </li>           
+              </li> 
+              <!-- <li><a class="nav-link <?php echo $page=="tickets"?'active':'';?>" href="{{URL::to('/admin/reviews')}}"><i class="fas fa-tachometer-alt"></i> <span>Reviews</span></a></li>
+                        -->
               <li class="menu-header">Administration</li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link <?php echo $page=="users"?'active':'';?> has-dropdown" data-toggle="dropdown"><i class="fas fa-funnel-dollar"></i> <span>Manage Users</span></a>

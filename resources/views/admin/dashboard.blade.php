@@ -29,38 +29,18 @@ use Carbon\Carbon;?>
               <div class="card card-statistic-2">
                 <div class="card-stats">
                   <div class="card-stats-title">Employers Stats -
-                    <div class="dropdown d-inline">
-                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">February</a>
-                      <ul class="dropdown-menu dropdown-menu-sm">
-                        <li class="dropdown-title">Select Month</li>
-                        <li><a href="#" class="dropdown-item">January</a></li>
-                        <li><a href="#" class="dropdown-item">February</a></li>
-                        <li><a href="#" class="dropdown-item">March</a></li>
-                        <li><a href="#" class="dropdown-item">April</a></li>
-                        <li><a href="#" class="dropdown-item">May</a></li>
-                        <li><a href="#" class="dropdown-item">June</a></li>
-                        <li><a href="#" class="dropdown-item">July</a></li>
-                        <li><a href="#" class="dropdown-item active">August</a></li>
-                        <li><a href="#" class="dropdown-item">September</a></li>
-                        <li><a href="#" class="dropdown-item">October</a></li>
-                        <li><a href="#" class="dropdown-item">November</a></li>
-                        <li><a href="#" class="dropdown-item">December</a></li>
-                      </ul>
-                    </div>
+                   
                   </div>
                   <div class="card-stats-items">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Pending</div>
+                      <div class="card-stats-item-count">{{getStat("employer","active")}}</div>
+                      <div class="card-stats-item-label"><span class="badge">Active</span></div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">52</div>
-                      <div class="card-stats-item-label">Approved</div>
+                      <div class="card-stats-item-count">{{getStat("employer","deactivated")}}</div>
+                      <div class="card-stats-item-label">Banned</div>
                     </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">41</div>
-                      <div class="card-stats-item-label">Rejected</div>
-                    </div>
+                  
                   </div>
                 </div>
                 <div class="card-icon shadow-primary bg-primary">
@@ -68,10 +48,10 @@ use Carbon\Carbon;?>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>All</h4>
+                    <h4>Total</h4>
                   </div>
                   <div class="card-body">
-                    117
+                  {{getStat("employer","total")}}
                   </div>
                 </div>
               </div>
@@ -80,38 +60,18 @@ use Carbon\Carbon;?>
               <div class="card card-statistic-2">
                 <div class="card-stats">
                   <div class="card-stats-title">candidates Stats -
-                    <div class="dropdown d-inline">
-                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">February</a>
-                      <ul class="dropdown-menu dropdown-menu-sm">
-                        <li class="dropdown-title">Select Month</li>
-                        <li><a href="#" class="dropdown-item">January</a></li>
-                        <li><a href="#" class="dropdown-item">February</a></li>
-                        <li><a href="#" class="dropdown-item">March</a></li>
-                        <li><a href="#" class="dropdown-item">April</a></li>
-                        <li><a href="#" class="dropdown-item">May</a></li>
-                        <li><a href="#" class="dropdown-item">June</a></li>
-                        <li><a href="#" class="dropdown-item">July</a></li>
-                        <li><a href="#" class="dropdown-item active">August</a></li>
-                        <li><a href="#" class="dropdown-item">September</a></li>
-                        <li><a href="#" class="dropdown-item">October</a></li>
-                        <li><a href="#" class="dropdown-item">November</a></li>
-                        <li><a href="#" class="dropdown-item">December</a></li>
-                      </ul>
-                    </div>
+                  
                   </div>
                   <div class="card-stats-items">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">17</div>
-                      <div class="card-stats-item-label">Pending</div>
+                      <div class="card-stats-item-count">{{getStat("candidate","active")}}</div>
+                      <div class="card-stats-item-label"><span class="badge">Active</span></div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Approved</div>
+                      <div class="card-stats-item-count">{{getStat("candidate","deactivated")}}</div>
+                      <div class="card-stats-item-label"><span class="badge">Banned</span></div>
                     </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
-                      <div class="card-stats-item-label">Rejected</div>
-                    </div>
+                   
                   </div>
                 </div>
                 <div class="card-icon shadow-primary bg-primary">
@@ -119,10 +79,10 @@ use Carbon\Carbon;?>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>All</h4>
+                    <h4>Total</h4>
                   </div>
                   <div class="card-body">
-                    52
+                  {{getStat("candidate","total")}}
                   </div>
                 </div>
               </div>
@@ -131,37 +91,20 @@ use Carbon\Carbon;?>
               <div class="card card-statistic-2">
                 <div class="card-stats">
                   <div class="card-stats-title">Job Posts -
-                    <div class="dropdown d-inline">
-                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">February</a>
-                      <ul class="dropdown-menu dropdown-menu-sm">
-                        <li class="dropdown-title">Select Month</li>
-                        <li><a href="#" class="dropdown-item">January</a></li>
-                        <li><a href="#" class="dropdown-item">February</a></li>
-                        <li><a href="#" class="dropdown-item">March</a></li>
-                        <li><a href="#" class="dropdown-item">April</a></li>
-                        <li><a href="#" class="dropdown-item">May</a></li>
-                        <li><a href="#" class="dropdown-item">June</a></li>
-                        <li><a href="#" class="dropdown-item">July</a></li>
-                        <li><a href="#" class="dropdown-item active">August</a></li>
-                        <li><a href="#" class="dropdown-item">September</a></li>
-                        <li><a href="#" class="dropdown-item">October</a></li>
-                        <li><a href="#" class="dropdown-item">November</a></li>
-                        <li><a href="#" class="dropdown-item">December</a></li>
-                      </ul>
-                    </div>
+                  
                   </div>
                   <div class="card-stats-items">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">249</div>
-                      <div class="card-stats-item-label">Pending</div>
+                      <div class="card-stats-item-count">{{getStat("jobpost","published")}}</div>
+                      <div class="card-stats-item-label"><span class="badge">Published</span></div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">154</div>
-                      <div class="card-stats-item-label">Taken</div>
+                      <div class="card-stats-item-count">{{getStat("jobpost","taken")}}</div>
+                      <div class="card-stats-item-label"><span class="badge">Taken</span></div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">763</div>
-                      <div class="card-stats-item-label">Rejected</div>
+                      <div class="card-stats-item-count">{{getStat("jobpost","expired")}}</div>
+                      <div class="card-stats-item-label"><span class="badge">Expired</span></div>
                     </div>
                   </div>
                 </div>
@@ -173,7 +116,7 @@ use Carbon\Carbon;?>
                     <h4>All</h4>
                   </div>
                   <div class="card-body">
-                    1,166
+                  {{getStat("jobpost","total")}}
                   </div>
                 </div>
               </div>
@@ -187,48 +130,15 @@ use Carbon\Carbon;?>
                 <div class="card-header">
                   <h4>Recent Job Posts</h4>
                   <div class="card-header-action">
-                    <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{URL::to('/admin/all-job-posts')}}" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive table-invoice">
-                    <table class="table table-striped">
-                      <tr>
-                        <th>Job ID</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
-                        <th>Action</th>
-                      </tr>
-                      <tr>
-                        <td><a href="#">465</a></td>
-                        <td class="font-weight-600">Accounting Officer</td>
-                        <td><div class="badge badge-secondary">Pending</div></td>
-                        <td>July 19, 2022</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">view</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td><a href="#">466</a></td>
-                        <td class="font-weight-600">Office Clerk</td>
-                        <td><div class="badge badge-success">Approved</div></td>
-                        <td>May 20, 2022</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">view</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">467</a></td>
-                        <td class="font-weight-600">Driver</td>
-                        <td><div class="badge badge-success">Approved</div></td>
-                        <td>March 13, 2022</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">view</a>
-                        </td>
-                      </tr>
-                     
-                    </table>
+                  <table class='table table-striped'>
+                  {!!getRecentPosts()!!}
+                  </table>
+                    
                   </div>
                 </div>
               </div>
@@ -239,46 +149,10 @@ use Carbon\Carbon;?>
                   <div class="card-icon">
                     <i style="color:#fff" class=" far fa-question-circle"></i>
                   </div>
-                  <h4>14</h4>
-                  <div class="card-description">Support Requests</div>
+                  <h4>{{getTotalApplication()}}</h4>
+                  <div class="card-description">Job Applications</div>
                 </div>
-                <div class="card-body p-0">
-                  <div class="tickets-list">
-                    <a href="#" class="ticket-item">
-                      <div class="ticket-title">
-                        <h4>I haven't recieved the staff yet</h4>
-                      </div>
-                      <div class="ticket-info">
-                        <div>Shola Ahmed</div>
-                        <div class="bullet"></div>
-                        <div class="text-primary">1 min ago</div>
-                      </div>
-                    </a>
-                    <a href="#" class="ticket-item">
-                      <div class="ticket-title">
-                        <h4>Please cancel my request</h4>
-                      </div>
-                      <div class="ticket-info">
-                        <div>Rita Sani</div>
-                        <div class="bullet"></div>
-                        <div>2 hours ago</div>
-                      </div>
-                    </a>
-                    <a href="#" class="ticket-item">
-                      <div class="ticket-title">
-                        <h4>I have paid for this month</h4>
-                      </div>
-                      <div class="ticket-info">
-                        <div>Daniel Uzor</div>
-                        <div class="bullet"></div>
-                        <div>6 hours ago</div>
-                      </div>
-                    </a>
-                    <a href="features-tickets.html" class="ticket-item ticket-more">
-                      View All <i class="fas fa-chevron-right"></i>
-                    </a>
-                  </div>
-                </div>
+               {!!applicationRequest()!!}
               </div>
             </div>
           </div>

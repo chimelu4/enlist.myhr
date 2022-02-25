@@ -1,5 +1,5 @@
 <?php $page='settings';?>
-@extends('master')
+@extends('admin.master')
 @section('content')
 <?php   use \App\Http\Controllers\JobroleController; ?>
 <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">

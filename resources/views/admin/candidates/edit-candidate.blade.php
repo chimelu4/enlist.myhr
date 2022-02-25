@@ -8,7 +8,7 @@
           <div class="section-header">
           <nav aria-label="breadcrumb">
                       <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{URL::to('dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/all-candidates')}}"><i class="fas fa-list"></i> All Candidates</a></li>
                         <li class="breadcrumb-item " aria-current="page">Edit Candidate</li>
                       </ol>

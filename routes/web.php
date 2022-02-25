@@ -3,6 +3,8 @@
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\AccounttypeController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AllcvController;
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
@@ -11,8 +13,12 @@ use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\JobpostController;
 use App\Http\Controllers\JobroleController;
 use App\Http\Controllers\JobtypesController;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserAuthController;
+use App\Models\application;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -34,13 +40,13 @@ Route::get('/register/{type}', [UserAuthController::class, 'register'])
     ->name('user.login');
 Route::post('/signin', [UserAuthController::class, 'handleLogin'])
     ->name('user.signin');
-Route::get('/logout', [UserAuthController::class, 'index'])
+Route::get('/logout', [UserAuthController::class, 'logout'])
     ->name('user.logout');
     Route::get('user/forgot-my-password', [UserAuthController::class, 'forgot']);
     Route::post('user/signup', [UserAuthController::class, 'registerUser'])
     ->name('user.signup');
     Route::post('/user/checkreg', [HomeController::class, 'checkReg']);
-
+    Route::post('/download-cv', [AllcvController::class, 'index']);
 
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])
@@ -49,7 +55,7 @@ Route::post('admin/register', [AdminAuthController::class, 'registerUser'])
     ->name('admin.register');
 Route::post('admin/signin', [AdminAuthController::class, 'handleLogin'])
     ->name('admin.signin');
-Route::get('admin/logout', [AdminAuthController::class, 'index'])
+Route::get('admin/logout', [AdminAuthController::class, 'logout'])
     ->name('admin.logout');
     Route::get('admin/forgot-my-password', [AdminAuthController::class, 'forgot']);
 
@@ -57,9 +63,32 @@ Route::get('admin/logout', [AdminAuthController::class, 'index'])
     Route::get('/check-email/{em}', [UsersController::class,'checkemail']);//this checks email an id's
     Route::get('/check-phone/{ph}', [UsersController::class,'checkphone']);//this checks phone an id's
 
-Route::middleware(['middleware'=> 'auth:web'])->group(function () {  
+Route::middleware(['middleware'=> 'auth:web'])->group(function () {
+
   Route::get('/user/dashboard', [UserAuthController::class, 'home'])
   ->name('user.dashboard');
+  Route::get('/user/job/apply/{id}',[ApplicationController::class,'index']);
+  Route::post('/user/job/apply',[ApplicationController::class,'store']);
+  Route::get('/user/notifications', [NotificationController::class,'indexUser']);
+  Route::get('/user/notifications-mark-read', [NotificationController::class,'read']);
+  Route::get('/user/search/{text}', [LinkController::class,'userSearch']);//this checks username an id's
+
+  Route::get('/user/about', [UserAuthController::class,'about']);//this shows single row for staff edit
+  Route::get('/user/mycompany', [UserAuthController::class,'mycompany']);//this shows single row for staff edit
+  Route::post('/user/update/company', [UserAuthController::class,'updateCompany']);//this updates jobrole value
+
+  Route::get('/user/company/hires', [UserAuthController::class,'myhires']);//this updates jobrole value
+
+  Route::get('/user/cv', [UserAuthController::class,'cv']);//this shows single row for staff edit
+  Route::post('/user/upload/cv', [AllcvController::class,'uploadCV']);//this shows single row for staff edit
+  Route::post('/user/update/profile', [UserAuthController::class,'updateProfile']);//this updates jobrole value
+  
+ Route::post('/user/security-check-password-change', [UserAuthController::class,'passwordchange']);//this delete a user
+ Route::get('/user/all-jobs', [UsersController::class,'alljobs']);//this delete a user
+
+ Route::get('/user/raise-support', [SupportController::class,'create']);//this delete a user
+ Route::post('/user/post-support', [SupportController::class,'store']);//this delete a user
+ 
 
 });
 
@@ -108,6 +137,14 @@ Route::middleware(['middleware'=> 'auth:web'])->group(function () {
   Route::get('/admin/delete-industry/{id}', [IndustryController::class,'destroy']);//this updates value
   
   //job types
+  Route::get('/admin/all-applications', [ApplicationController::class,'show']);//this updates value
+  Route::get('/view-single-application/{id}', [ApplicationController::class,'showSingle']);//this updates value
+  Route::get('/admin/delete-application/{id}', [ApplicationController::class,'destroy']);
+
+  Route::get('/admin/assign-job/{id}', [ApplicationController::class,'assign']);//this updates value
+  Route::get('/admin/reject-job/{id}', [ApplicationController::class,'reject']);//this updates value
+  
+
   Route::get('/admin/all-job-types', [JobtypesController::class,'index']);//this updates value
   Route::post('/admin/store-job-type', [JobtypesController::class,'store']);//this updates value
   Route::get('/admin/get-job-type-value/{id}', [JobtypesController::class,'show']);//this updates value
@@ -125,9 +162,19 @@ Route::middleware(['middleware'=> 'auth:web'])->group(function () {
   Route::get('admin/all-job-posts', [JobpostController::class,'index']);//this updates value
   Route::get('/admin/post-job', [JobpostController::class,'create']);//this updates value
   Route::post('/admin/store-post', [JobpostController::class,'store']);//this updates value
-  Route::get('/admin/get-post-value/{id}', [JobpostController::class,'show']);//this updates value
+  Route::get('/admin/edit-job-post/{id}', [JobpostController::class,'edit']);//this updates value
   Route::post('/admin/update-post', [JobpostController::class,'update']);//this updates value
   Route::get('/admin/delete-post/{id}', [JobpostController::class,'destroy']);
+
+  Route::get('/admin/notifications', [NotificationController::class,'index']);
+  Route::get('/admin/notifications-mark-read', [NotificationController::class,'read']);
+
+  Route::get('/admin/search/{text}', [LinkController::class,'index']);//this checks username an id's
+  Route::get('/admin/get-user-info/{id}/{type}', [LinkController::class,'getUserInfo']);//this checks username an id's
+
+
+  Route::get('/admin/reviews', [SupportController::class,'index']);//this checks username an id's
+  Route::get('/admin/view-ticket/{id}', [SupportController::class,'show']);//this checks username an id's
 
 
   
@@ -145,6 +192,7 @@ Route::get('/about',[HomeController::class,'about']);
 Route::get('/services',[HomeController::class,'service']);
 Route::get('/pricing',[HomeController::class,'pricing']);
 Route::get('/contact',[HomeController::class,'contact']);
+Route::get('/jobpost/{id}',[HomeController::class,'postDetails']);
 Route::get('forgot-my-password', [HomeController::class,'forgotPassword']);
 Route::post('/reset-password-post', [HomeController::class,'resetPassword']); //filters admin and mobile users
 Route::get('/check-admin-login/{email}/{password}', [HomeController::class,'checkAdmin']); //filters admin and mobile users

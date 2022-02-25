@@ -511,6 +511,21 @@ a[href^=tel] {
   background: #ff4500;
   color:#fff;
 }
+
+.btn-outline {
+  border: 1px solid #ff4500;
+  border-radius: 3px;
+  padding: 12px 20px 10px;
+  font-weight: 500;
+  color: #ff4500;
+  font-family: "Montserrat", sans-serif;
+  transition: 350ms;
+  font-size: 12px;
+}
+.btn-outline:hover{
+  background: #ff4500;
+  color:#fff;
+}
 @media (max-width: 767px) {
   .btn-primary,
   .btn-dark {
@@ -3937,8 +3952,9 @@ ul.no-bullets {
   margin-right:0px; }
 
 .img{
-  display: inline;
-  border-radius: 10px;;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #3333;
 }
 .img img{
   width:100%;
@@ -3946,6 +3962,18 @@ ul.no-bullets {
   margin-top:4px;
 }
 
+.post-img{
+  width:70%;
+  height: 300px;
+  margin-top:4px;
+  border-top-left-radius: 1px solid #3333;
+  display: lock;
+}
+.badge-primary{
+  background-color: #ff4500;
+}.badge-default{
+  background-color:lightgray;
+}
 @media only screen and (max-width:992px){
   .call{
     height:120px;

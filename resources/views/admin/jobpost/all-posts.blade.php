@@ -30,7 +30,7 @@
                   </div>
                   <div class="card-body">
                   
-                  <button class="btn btn-primary mb-4" data-toggle="modal" data-target="#exampleModal">Post Job</button>
+                  <a href="{{URL::to('/admin/post-job')}}" class="btn btn-primary mb-4" >Post Job</a>
                <div class="container">
                <div class="row">
                <div class="col-md-12">
@@ -44,10 +44,9 @@
                             </th>
                             <th class="text-center">Title</th>
                             <th class="text-center">Job Type</th>
-                            <th class="text-center">Industry</th>
                             <th class="text-center">Company Name</th>
-                            <th class="text-center">Application</th>
-                            <th class="text-center">Image</th>
+                            <th class="text-center">Applications</th>
+                            <th class="text-center">Thumbnail</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                           </tr>
@@ -62,14 +61,27 @@
                               </div>
                             </td class="text-center">
                               <td class="text-center"> {{$data->job_title}}</td>
-                              <td class="text-center"> {{$data->job_type}}</td>
-                              <td class="text-center"> {{$data->industry}}</td>
-                              <td class="text-center"> {{$data->company_id}}</td>
-                              <td class="text-center"> {{$data->applied}}</td>   
+                              <td class="text-center"> {{ getObjectName("type",$data->job_type)}}</td>
+                              <td class="text-center"> {{ getObjectName("company",$data->company_id)}}</td>
+                              <td class="text-center"> {{getApplicationsCount($data->id)}}</td>   
                               <td class="text-center"><img src="{{URL::to('/')}}/public/{{$data->image}}" class="table-img" ></td>
-                              <td class="text-center"> {{$data->status}}</td>
-                             <td class="text-center"><a href="#" data-id="{{$data->id}}"  data-toggle="modal" data-target="#exampleModalEdit" class="btn tablebtn btn-secondary edit">Edit</a>        
-                             <a href=""  data-id="{{$data->id}}"   class="btn  tablebtn delete-qualification btn-danger">Delete</a></td>
+                              <td class="text-center"> {!! showPostStatus($data->status)!!}</td>
+                             <td class="text-center">
+                          <div class="btn-group custom-dropdown mb-0 dropleft">
+                      <div type="button" style="border: none;" class="badge sharp tp-btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="12" cy="5" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="12" cy="19" r="2"/></g></svg>
+                           </div>
+                           
+                      <div class="dropdown-menu dropleft">
+                      <a  href="{{URL::to('/jobpost')}}/{{$data->id}}"  class=" dropdown-item  ">View</a>        
+                      <a  href="{{URL::to('/admin/edit-job-post')}}/{{$data->id}}"  class=" dropdown-item  ">Edit</a>        
+                             <a href=""  data-id="{{$data->id}}"   class=" dropdown-item  delete-post ">Delete</a>
+                              
+					 
+					 
+                      </div>
+                    </div>
+                            </td>
                             </tr>
                           
                           
@@ -112,125 +124,13 @@
   $('.spin').hide();
 
 
-  $('.edit').on('click',function(){
- var id = $(this).data('id');
-
- $.ajax({  
-                        url:"{{URL::to('/')}}/admin/get-qualification-value/"+id,  
-                        type:"get",  
-                        success:function(data)  
-                        {  
-                            $('#edit_name').val(data.name);
-                          $('#edit_id').val(data.id);
-                          $('#edit_abbr').val(data.abbr);
-                         
-
-                        }  
-                  });  
-
-  });
 
 
-//adding jobrole
-$(".btnAddQualification").on("click", function(event){
-      event.preventDefault();
-      $('.spin').show();
-//alert('form submit');
-var name = $('#name').val();
-var abbr = $('#abbr').val();
 
-$.ajaxSetup({
-  headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-$.ajax({
-  type:'post',
-    url:'{{URL::to('/')}}/admin/store-qualification',
-    data:{name:name,abbr:abbr},
-    success: function(data){
-      if(data == 1){
-        $('.spin').hide();
-        $('#exampleModal').modal('hide');
-        Fnon.Hint.Success('Qualification added successfully. Good!', {
-          position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
-          animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
-         callback:function(){
-          // callback
-          }
-        });
-location.reload(false);
 
-}else{
-    $('.spin').hide();
-  Fnon.Hint.Danger(data, {
-    position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
-          animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
-         callback:function(){
-          // callback
-          }
-  });
-}
-
-    }
-
-}) ;      
-      
-      
-  });
-  
-  //adding jobrole
-$(".btnUpdateQualification").on("click", function(event){
-      event.preventDefault();
-      $('.spin').show();
-//alert('form submit');
-
-var name = $('#edit_name').val();
-var id = $('#edit_id').val();
-var abbr = $('#edit_abbr').val();
-
-$.ajaxSetup({
-  headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-$.ajax({
-  type:'post',
-    url:'{{URL::to('/')}}/admin/update-qualification',
-    data:{name:name,id:id,abbr:abbr},
-    success: function(data){
-      if(data == 1){
-        $('.spin').hide();
-        $('#exampleModal').modal('hide');
-        Fnon.Hint.Success('Qualification Updated successfully. Well done!', {
-          position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
-          animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
-         callback:function(){
-          // callback
-          }
-        });
-location.reload(false);
-
-}else  {
-    $('.spin').hide();
-  Fnon.Hint.Danger(data, {
-    position: 'center-center', // 'right-top', 'right-center', 'right-bottom', 'left-top', 'left-center', 'left-bottom', 'center-top', 'center-center', 'center-bottom'
-          animation: 'slide-left', //'fade', 'slide-top', 'slide-bottom', 'slide-right' and 'slide-left'
-         callback:function(){
-          // callback
-          }
-  });
-}
-
-    }
-
-}) ;      
-      
-      
-  });
 
   //Deleting job-role
-  $('.delete-qualification').click(function(e){
+  $('.delete-post').click(function(e){
           e.preventDefault();  
           var el = this;
           var id = $(this).data('id');
@@ -240,7 +140,7 @@ location.reload(false);
               
               
                   $.ajax({  
-                        url:"{{URL::to('/')}}/admin/delete-qualification/"+id,  
+                        url:"{{URL::to('/')}}/admin/delete-post/"+id,  
                         type:"get",  
                         success:function(data)  
                         {  

@@ -18,7 +18,7 @@ class JobroleController extends Controller
        
        $jobroles =  Jobrole::all();
        //report_it("Opened jobrole form");
-        return view('jobroles.all', compact('jobroles'));
+        return view('admin.jobroles.all', compact('jobroles'));
     }
 
     /**

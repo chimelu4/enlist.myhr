@@ -60,7 +60,7 @@
             <div class="row align-items-center">
               <div class="logo col-lg-3 text-center text-lg-left mb-3 mb-md-5 mb-lg-0">
                   <a class="d-block" href="index">
-                    <img loading="lazy" src="{{URL::to('/')}}/public/frontend/assets/images/logo.png" alt="Constra">
+                    <img loading="lazy" src="{{URL::to('/')}}/public/frontend/assets/images/logo.png" alt="Enlist">
                   </a>
               </div><!-- logo end -->
     
